@@ -1,0 +1,35 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: gcp-service
+  labels:
+    app: gcp-service
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: gcp-service
+  template:
+    metadata:
+      labels:
+        app: gcp-service
+    spec:
+      containers:
+        - name: gcp-service
+          image: ecioptime1231/gcp-service:latest  # Replace with your Docker image
+          imagePullPolicy: Always   # <-- Add this line
+          ports:
+            - containerPort: 3003
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: gcp-service-service
+spec:
+  selector:
+    app: gcp-service
+  ports:
+    - protocol: TCP
+      port: 3003
+      targetPort: 3003
+  type: ClusterIP

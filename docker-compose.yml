@@ -1,0 +1,46 @@
+version: '3.8'
+
+services:
+  api-gateway:
+    build: ./api-gateway
+    image: ecioptime1231/api-gateway:latest  # Replace with your Docker registry
+    ports:
+      - "3000:3000"
+    networks:
+      - microservices-net
+
+  aws-service:
+    build: ./aws-service
+    image: ecioptime1231/aws-service:latest  # Replace with your Docker registry
+    ports:
+      - "3001:3001"
+    networks:
+      - microservices-net
+
+  azure-service:
+    build: ./azure-service
+    image: ecioptime1231/azure-service:latest  # Replace with your Docker registry
+    ports:
+      - "3002:3002"
+    networks:
+      - microservices-net
+
+  gcp-service:
+    build: ./gcp-service
+    image: ecioptime1231/gcp-service:latest  # Replace with your Docker registry
+    ports:
+      - "3003:3003"
+    networks:
+      - microservices-net
+
+  k8s-service:
+    build: ./k8s-service
+    image: ecioptime1231/k8s-service:latest  # Replace with your Docker registry
+    ports:
+      - "3004:3004"
+    networks:
+      - microservices-net
+
+networks:
+  microservices-net:
+    driver: bridge
